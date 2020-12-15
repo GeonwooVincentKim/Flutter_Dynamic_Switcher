@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             initialRoute: "/",
             routes: {
               "/": (context) => TestBody(),
-              "/detail": (context) => TestPage()
+              // "/detail": (context) => TestPage()
             },
             onGenerateRoute: (settings) {
               final List<String> routeGenerator = settings.name.split("/");
