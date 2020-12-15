@@ -11,7 +11,7 @@ class TestSideMenu extends StatefulWidget {
 class _TestSideMenuState extends State<TestSideMenu> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<DynamicThemeProvider>(context);
+    final themeProvider = Provider.of<DynamicThemeProvider>(context);  
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -27,17 +27,27 @@ class _TestSideMenuState extends State<TestSideMenu> {
           ),
           // It changes color black to white(or white to black)
           // when you click the switch.
-          ListTile(
-            title: Text("Test"),
-            trailing: Switch(
-              value: themeProvider.getDarkMode(),
-              onChanged: (value){
-                setState(() {
-                  themeProvider.changeDarkMode(value);
-                });
-              }
+          // ListTile(
+          //   title: Text("Test"),
+          //   trailing: Switch(
+          //     value: themeProvider.getDarkMode(),
+          //     onChanged: (value){
+          //       setState(() {
+          //         themeProvider.changeDarkMode(value);
+          //       });
+          //     }
+          //   ),
+          // ),
+          Consumer<DynamicThemeProvider>(
+                builder:(context, notifier, child) => 
+                  SwitchListTile(
+                    title: Text("Dark Mode"),
+                    onChanged:(value){
+                      notifier.toggleTheme();
+                  } ,
+                  value: notifier.darkTheme ,
+              ),
             ),
-          ),
           ListTile(title: Text("Filter"), onTap: (){Navigator.pushNamed(context, "/detail");}),
         ],
       )
